@@ -1,63 +1,43 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f6f9ff" />
-    <meta name="description" content="机器人学个人知识图谱：从数学基础、建模控制到 SLAM、导航、具身智能与研究实践。" />
-    <title>Robotics Atlas · 机器人知识图谱</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="app.js" defer></script>
-  </head>
-  <body>
-    <div class="site-shell">
-      <aside class="sidebar" id="sidebar" aria-label="知识领域导航">
-        <a class="brand" href="#home" aria-label="返回首页">
-          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-          <span class="brand-copy"><strong>ROBOTICS<span class="brand-accent">.</span>ATLAS</strong><small>机器人知识图谱</small></span>
-        </a>
-        <div class="side-divider"></div>
-        <p class="side-label">EXPLORE / 探索</p>
-        <nav id="sideNav"></nav>
-        <div class="side-bottom">
-          <div class="side-bottom-icon" aria-hidden="true">↗</div>
-          <p>从基础理论，到真实世界。</p>
-          <span>LEARN · BUILD · RESEARCH</span>
-        </div>
-      </aside>
-
-      <div class="content-shell">
-        <header class="topbar">
-          <div class="topbar-left">
-            <button class="menu-button" id="menuButton" aria-label="打开导航" aria-expanded="false">☰</button>
-            <span class="topbar-path">KNOWLEDGE BASE <span>/</span> <span id="topbarCurrent">OVERVIEW</span></span>
-          </div>
-          <button class="search-trigger" id="searchTrigger" type="button" aria-label="搜索知识点">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-            <span>搜索知识点...</span><kbd>⌘ K</kbd>
-          </button>
-          <span class="topbar-status"><i></i> ALWAYS LEARNING</span>
-        </header>
-        <main id="app" tabindex="-1"></main>
-        <footer class="footer"><span>ROBOTICS ATLAS <span class="footer-dot">●</span> PERSONAL KNOWLEDGE BASE</span><span>CURATED FOR CONTINUOUS LEARNING</span></footer>
-      </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="机器人学个人知识库：数学、建模与控制、系统、感知、导航、具身智能和研究实践。">
+  <title>机器人知识库</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="vendor/markdown-it.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <button id="menuToggle" class="menu-toggle" type="button" aria-label="打开章节目录" aria-controls="fileNav" aria-expanded="false">☰</button>
+      <a class="site-name" href="#home">机器人知识库</a>
+      <span class="header-separator">/</span>
+      <span id="headerCurrent" class="header-current">README.md</span>
+      <a class="repo-link" href="https://github.com/YeLuo-123/Foxbot.github.io" target="_blank" rel="noopener noreferrer">GitHub 仓库 ↗</a>
     </div>
+  </header>
 
-    <div class="overlay" id="searchOverlay" hidden>
-      <div class="search-modal" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
-        <div class="search-modal-head">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-          <label id="searchTitle" class="sr-only" for="searchInput">搜索知识点</label>
-          <input id="searchInput" type="search" placeholder="搜索领域、主题或知识点..." autocomplete="off" />
-          <button id="closeSearch" type="button" aria-label="关闭搜索">ESC</button>
+  <div class="layout">
+    <aside id="sidebar" class="sidebar" aria-label="章节目录">
+      <div class="sidebar-heading">文件</div>
+      <nav id="fileNav"></nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="breadcrumb"><span>content</span><span class="slash">/</span><strong id="breadcrumbFile">README.md</strong></div>
+      <section class="file-view" aria-label="Markdown 正文">
+        <div class="file-bar">
+          <span class="file-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M3 1.75h6.1L13 5.6v8.65H3V1.75Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 1.75v4h4" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></span>
+          <span id="fileName">README.md</span>
+          <a id="editLink" href="https://github.com/YeLuo-123/Foxbot.github.io/edit/main/content/README.md" target="_blank" rel="noopener noreferrer">在 GitHub 编辑</a>
         </div>
-        <div id="searchResults" class="search-results"></div>
-        <div class="search-hint">输入关键词，快速跳转到对应知识模块</div>
-      </div>
-    </div>
-    <div class="mobile-shade" id="mobileShade" hidden></div>
-  </body>
+        <article id="markdownBody" class="markdown-body" aria-live="polite"></article>
+      </section>
+    </main>
+  </div>
+</body>
 </html>
